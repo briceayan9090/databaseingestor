@@ -1,7 +1,6 @@
-version: '3.8'
-
 services:
-  db:
+  ingestor-db:
+    container_name: ingestor-db
     image: postgres:15
     environment:
       POSTGRES_USER: postgres
@@ -11,11 +10,14 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    networks:
+      - shared-network
 
-  frontend:
+  ingestor-frontend:
+    container_name: ingestor-frontend
     build: ./frontend
     ports:
-      - "8501:8501"
+      - "8084:8501"
     environment:
       DB_HOST: db
       DB_NAME: mydatabase
@@ -24,6 +26,12 @@ services:
       DB_PORT: 5432
     depends_on:
       - db
+    networks:
+      - shared-network
 
 volumes:
-  db_data:
+  ingestor-db:
+
+networks:
+  shared-network:
+    external: true

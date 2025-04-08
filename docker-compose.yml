@@ -9,7 +9,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - ingestor-db:/var/lib/postgresql/data
     networks:
       - shared-network
 
@@ -19,13 +19,13 @@ services:
     ports:
       - "8084:8501"
     environment:
-      DB_HOST: db
+      DB_HOST: ingestor-db
       DB_NAME: mydatabase
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_PORT: 5432
     depends_on:
-      - db
+      - ingestor-db
     networks:
       - shared-network
 

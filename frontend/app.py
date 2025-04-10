@@ -12,6 +12,7 @@ DB_USER = os.environ.get("DB_USER", "postgres")
 DB_PASSWORD = os.environ.get("DB_PASSWORD", "postgres")
 DB_PORT = os.environ.get("DB_PORT", "5432")
 
+st.set_page_config(page_title="XLSX Ingestor", layout="centered")
 st.title("XLSX Ingestor")
 
 uploaded_files = st.file_uploader("Upload one or more XLSX files", type=["xlsx"], accept_multiple_files=True)
